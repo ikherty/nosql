@@ -1,31 +1,23 @@
 object var12 {
   def randomArray(n: Int) = {
-    val Array = new Array[Int](n)
-    println("Array of " + n + " elements:")
-    for (i <- 0 until Array.length) {
-      Array(i) = scala.util.Random.nextInt(20)
-      print(Array(i) + " ")
-    }
-    println()
-    Array
+    (0 to n map (_ => scala.util.Random.nextInt(20))).toArray
+  }
+
+  def countDiffFromAverageBy5(array: Array[Int], avrg: Int): Int = {
+    array.count(_ - avrg == 5)
   }
 
   def diffFromAverageBy5(n: Int) = {
+    println("Array of " + n + " elements:")
     val Array = randomArray(n)
     val avrg = Array.sum / Array.length
+    println(Array.mkString(","))
     println("Average=" + avrg)
-    var sum = 0
-    println("New Array:")
-    for (i <- 0 until Array.length) {
-      if (Math.abs(Array(i) - avrg) >= 5)
-        sum += 1
-      print(Array(i) + " ")
-    }
-    println()
-    print("Sum of elements=" + sum)
+    print("Sum of elements=" + countDiffFromAverageBy5(Array, avrg))
   }
 
   def main(args: Array[String]) {
-    diffFromAverageBy5(40)
+    diffFromAverageBy5(10)
   }
 }
+
